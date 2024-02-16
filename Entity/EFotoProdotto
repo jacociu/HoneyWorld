@@ -1,0 +1,129 @@
+<?php
+
+class EFotoProdotto implements JsonSerializable
+{
+   
+    private  $idFoto;
+    
+    private  $nomeFoto;
+    
+    private $size;
+   
+    private $tipo;
+    
+    private $foto;
+    private $idProdotto;
+
+    //costruttore idFoto è autoassegnato dal db
+
+    public function __construct(  $nomeFoto,  $size, $tipo, $foto, EProdotto $p)
+    {
+        $this->nomeFoto = $nomeFoto;
+        $this->size = $size;
+        $this->tipo = $tipo;
+        $this->foto = $foto;
+        $this->idProdotto = new Eprodotto($p->getNome(),$p->getDescrizione(),$p->getPrezzo(),$p->getDisponibilita());
+    }
+
+    public function getidProdotto(){
+        return $this->idProdotto;}
+
+    public function setidProdotto($idProdotto){
+    $this->idProdotto=$idProdotto;
+    }
+
+    /**
+     * @return  idFoto
+    */
+        public function getIdFoto()
+    {
+        return $this->idFoto;
+    }
+
+    /**
+     * @param  $id id 
+     */
+    public function setIdFoto($idFoto): void
+    {
+        $this->idFoto = $idFoto;
+    }
+
+    /**
+     * @return  nomeFoto
+     */
+    public function getNomeFoto()
+    {
+        return $this->nomeFoto;
+    }
+
+    /**
+     * @param  $nomeFoto nome Foto
+     */
+    public function setNomeFoto($nomeFoto): void
+    {
+        $this->nomeFoto = $nomeFoto;
+    }
+
+    /**
+     * @return mixed dimensione Foto
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param mixed $size dimensione Foto
+     */
+    public function setSize($size): void
+    {
+        $this->size = $size;
+    }
+
+    /**
+     * @return mixed MIME type Foto
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * @param mixed $tipo MIME type Foto
+     */
+    public function setTipo($tipo): void
+    {
+        $this->tipo = $tipo;
+    }
+
+    /**
+     * @return mixed Foto
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * @param mixed $foto Foto
+     */
+    public function setFoto($foto): void
+    {
+        $this->foto = $foto;
+    }
+    
+
+    public function jsonSerialize ()
+    {
+        return
+            [
+                'idFoto'   => $this->getIdFoto(),
+                'nomeFoto' => $this->getNomeFoto(),
+                'size' => $this->getSize(),
+                'tipo'  =>  $this->getTipo(),
+                'foto'  =>  $this->getFoto(),
+                'idProdotto'   => $this->getidProdotto()
+            ];
+    }
+
+}
